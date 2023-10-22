@@ -11,4 +11,4 @@ COPY target/*.war .
 EXPOSE 9805
 
 # Define the command to run your Java application
-CMD ["java", "-jar", "*.war"]
+CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0"]
