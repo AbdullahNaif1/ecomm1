@@ -6,7 +6,7 @@ FROM jboss/wildfly
 COPY /target/*.war /opt/jboss/wildfly/standalone/deployments/
 
 # Expose the port your application will run on (adjust as needed)
-EXPOSE 9805
+EXPOSE 8080
 
 # Define the command to run your Java application
 CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0"]
