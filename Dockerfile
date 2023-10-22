@@ -5,10 +5,10 @@ FROM openjdk:8
 WORKDIR /app
 
 # Copy the compiled Java application JAR (if available) to the container
-COPY target/app.war .
+COPY target/*.war .
 
 # Expose the port your application will run on (adjust as needed)
 EXPOSE 9805
 
 # Define the command to run your Java application
-CMD ["java", "-war", "app.war"]
+CMD ["java", "-war", "*.war"]
