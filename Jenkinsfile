@@ -14,7 +14,7 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
-        stage('Package JAR') {
+        stage('Package WAR') {
             steps {
                 // Package the JAR file into the target directory
                 sh 'mvn package'
@@ -50,7 +50,7 @@ pipeline {
                 // Deploy the Docker container to your target environment
                 // Modify this step based on your deployment method and environment
                 // Example for a local Docker host:
-                sh 'docker run -d --name ecoomp -p 9805:9805 abdullah919191/ecoom:latest'
+                sh 'docker run -d --name ecoomp -p 8882:8882 abdullah919191/ecoom:latest'
             }
         }
     }
