@@ -1,4 +1,4 @@
-FROM bitnami/wildfly:latest
+FROM quay.io/wildfly/wildfly:latest
 COPY standalone.xml /opt/jboss/wildfly/standalone/configuration/standalone.xml
 COPY /target/*.war /opt/jboss/wildfly/standalone/deployments/
 EXPOSE 8882
