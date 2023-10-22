@@ -79,6 +79,17 @@
     
   </dependencies>
   <build>
-    <finalName>EcommerceApp</finalName>
-  </build>
-</project>
+      <plugins>
+              <plugin>
+                          <groupId>org.apache.maven.plugins</groupId>
+                              <artifactId>maven-compiler-plugin</artifactId>
+                                  <version>3.8.1</version> <!-- Use the latest version -->
+                                      <configuration>
+                                                      <source>1.8</source> <!-- Update source compatibility to the version you want -->
+                                                              <target>1.8</target> <!-- Update target compatibility to the version you want -->
+                                                                  </configuration>
+                                                                  </plugin>
+                                                                  <!-- Other plugins and configurations -->
+                                                              </plugins>
+                                              </build>
+                                      </project>
