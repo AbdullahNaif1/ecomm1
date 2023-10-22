@@ -11,4 +11,4 @@ COPY target/*.war .
 EXPOSE 9805
 
 # Define the command to run your Java application
-CMD ["java", "-war", "*.war"]
+CMD ["java", "-jar", "*.war"]
