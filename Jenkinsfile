@@ -23,7 +23,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 // Build a Docker image using a Dockerfile
-                sh 'docker build -t abdullah919191/mavenpipline .'
+                sh 'docker build --no-cache -t abdullah919191/ecoom .'
             }
         }
         stage('Push to Docker Hub') {
@@ -32,7 +32,7 @@ pipeline {
                 sh 'docker login -u abdullah919191 -p dckr_pat_raqTS6-xf-pZZ_Jiwtm3zAmyrfM'
 
                 // Push the Docker image to Docker Hub
-                sh 'docker push abdullah919191/mavenpipline'
+                sh 'docker push abdullah919191/ecoom'
             }
         }
         stage('Deploy Docker Container') {
@@ -40,8 +40,8 @@ pipeline {
                 // Stop and remove the existing container (if it exists)
                 script {
                     try {
-                        sh 'docker stop projecmaven'
-                        sh 'docker rm projecmaven'
+                        sh 'docker stop ecoomp'
+                        sh 'docker rm ecoomp'
                     } catch (Exception e) {
                         // It's okay if the container doesn't exist or other errors occur
                     }
@@ -50,7 +50,7 @@ pipeline {
                 // Deploy the Docker container to your target environment
                 // Modify this step based on your deployment method and environment
                 // Example for a local Docker host:
-                sh 'docker run -d --name projecmaven -p 8120:80 abdullah919191/mavenpipline:latest'
+                sh 'docker run -d --name ecoomp -p 8120:80 abdullah919191/ecoom:latest'
             }
         }
     }
