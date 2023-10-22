@@ -1,7 +1,6 @@
 # Use an official Java runtime as the base image
 FROM jboss/wildfly
 # Set the working directory in the container
-WORKDIR /app
 
 # Copy the compiled Java application JAR (if available) to the container
 COPY /target/*.war /opt/jboss/wildfly/standalone/deployments/
