@@ -1,14 +1,14 @@
-# Use the official WildFly image as the base image
-FROM jboss/wildfly:latest
+# Use an official Java runtime as the base image
+FROM openjdk:8
 
-# Define environment variables (if needed)
-# ENV VARIABLE_NAME=variable_value
+# Set the working directory in the container
+WORKDIR /app
 
-# Copy your EcommerceApp.war to the deployments folder in WildFly
-COPY *.war /opt/jboss/wildfly/standalone/deployments/
+# Copy the compiled Java application JAR (if available) to the container
+COPY target/app.war .
 
-# Expose the ports for WildFly (HTTP and management)
-EXPOSE 8080
+# Expose the port your application will run on (adjust as needed)
+EXPOSE 9805
 
-# Start WildFly in standalone mode
-CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0"]
+# Define the command to run your Java application
+CMD ["java", "-war", "app.war"]
