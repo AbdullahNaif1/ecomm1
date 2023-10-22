@@ -1,46 +1,56 @@
 pipeline {
     agent any
-    tools{
-        maven 'maven'
-        }
+
     stages {
         stage('Checkout') {
             steps {
+                // Check out your source code
                 checkout scm
             }
         }
-        // Define other stages here
-        stage('Build and Package') {
+        stage('Clean') {
             steps {
-                sh 'whoami'
-                sh 'mvn clean install package'
+                // Build your Maven project
+                sh 'mvn clean install'
             }
         }
-        
+        stage('Package JAR') {
+            steps {
+                // Package the JAR file into the target directory
+                sh 'mvn package'
+            }
+        }
         stage('Build Docker Image') {
             steps {
-            sh 'whoami'
-            sh 'docker build -t amir1adel/pipeline:1.0 .'
+                // Build a Docker image using a Dockerfile
+                sh 'docker build -t abdullah919191/mavenpipline .'
             }
         }
-        stage('Remove Existing Docker Container') {
+        stage('Push to Docker Hub') {
             steps {
-                sh 'docker stop Eco-app-by-pipeline || true'
-                sh 'docker rm Eco-app-by-pipeline || true'
+                // Log in to Docker Hub (make sure credentials are configured in Jenkins)
+                sh 'docker login -u abdullah919191 -p dckr_pat_raqTS6-xf-pZZ_Jiwtm3zAmyrfM'
+
+                // Push the Docker image to Docker Hub
+                sh 'docker push abdullah919191/mavenpipline'
             }
         }
-        stage('Run Docker Container') {
+        stage('Deploy Docker Container') {
             steps {
-                sh 'docker run -d -p 8082:8080 --name Eco-app-by-pipeline amir1adel/pipeline:1.0'
-            }
-        }
-        
-        stage('Push Docker Image') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'DockerHubCreds', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
-                    sh 'docker push amir1adel/pipeline:1.0'
-                } 
+                // Stop and remove the existing container (if it exists)
+                script {
+                    try {
+                        sh 'docker stop projecmaven'
+                        sh 'docker rm projecmaven'
+                    } catch (Exception e) {
+                        // It's okay if the container doesn't exist or other errors occur
+                    }
+                }
+
+                // Deploy the Docker container to your target environment
+                // Modify this step based on your deployment method and environment
+                // Example for a local Docker host:
+                sh 'docker run -d --name projecmaven -p 8120:80 abdullah919191/mavenpipline:latest'
             }
         }
     }
