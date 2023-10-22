@@ -23,7 +23,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 // Build a Docker image using a Dockerfile
-                sh 'docker build --no-cache -t abdullah919191/ecoom .'
+                sh 'docker build --no-cache --build-arg BUILDKIT_INLINE_CACHE=1 -t abdullah919191/ecoom .'
             }
         }
         stage('Push to Docker Hub') {
