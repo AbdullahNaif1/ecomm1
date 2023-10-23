@@ -50,7 +50,7 @@ pipeline {
                 // Deploy the Docker container to your target environment
                 // Modify this step based on your deployment method and environment
                 // Example for a local Docker host:
-                sh 'docker run -d --name ecoomp -p 8882:8882 -p 9990:9990 abdullah919191/ecoom:latest'
+                sh 'docker run -d --name ecoomp -p 8882:8080 -p 9990:9990 abdullah919191/ecoom:latest'
             }
         }
     }
